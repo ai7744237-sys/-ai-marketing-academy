@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Dashboard | AI Marketing Academy</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#172033}
+header{background:#101d36;color:white;padding:28px 20px}
+header h1{margin:0;font-size:25px}
+header p{color:#cbd5e1}
+main{max-width:850px;margin:25px auto;padding:0 16px}
+.welcome,.module{background:white;padding:20px;margin-bottom:16px;border-radius:12px}
+h2{margin-top:0}
+.progress{height:12px;background:#e5e7eb;border-radius:20px;overflow:hidden}
+#bar{height:100%;width:0;background:#16a34a}
+.module h3{margin-top:0;color:#18345d}
+.module details{margin-top:12px}
+summary{cursor:pointer;font-weight:bold;color:#2563eb}
+.task{display:block;margin-top:15px;background:#f1f5f9;padding:12px;border-radius:8px}
+button{background:#18345d;color:white;border:0;padding:12px 18px;border-radius:7px;margin-top:12px}
+footer{text-align:center;padding:25px;color:#64748b}
+</style>
+</head>
+<body>
+<header>
+<h1>AI Marketing Academy</h1>
+<p>Your six-week journey to practical AI marketing skills.</p>
+</header>
 
+<main>
+<section class="welcome">
+<h2>Welcome, Student!</h2>
+<p>Learn at your own pace. Complete each week's lessons and assignments.</p>
+<h3>Your course progress</h3>
+<div class="progress"><div id="bar"></div></div>
+<p id="count">0 of 6 weeks completed</p>
+</section>
+
+<h2>Your Six-Week Programme</h2>
+
+<section class="module">
+<h3>Week 1: Marketing Foundations</h3>
+<p>Understand customers, markets and marketing strategy.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: What is marketing?</p>
+<p>Lesson 2: Understanding your target audience</p>
+<p>Lesson 3: Customer research and market needs</p>
+<p>Assignment: Describe your ideal customer and identify three problems they face.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 1 complete</label>
+</section>
+
+<section class="module">
+<h3>Week 2: Offers, Copywriting and Sales</h3>
+<p>Learn to create offers that attract customers.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: Creating valuable offers</p>
+<p>Lesson 2: Writing persuasive marketing messages</p>
+<p>Lesson 3: Sales techniques and customer conversion</p>
+<p>Assignment: Create a simple offer and write a sales message.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 2 complete</label>
+</section>
+
+<section class="module">
+<h3>Week 3: Content, Social Media and SEO</h3>
+<p>Build visibility and attract an online audience.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: Social media marketing</p>
+<p>Lesson 2: Content planning and creation</p>
+<p>Lesson 3: Search engine optimisation basics</p>
+<p>Assignment: Create a seven-day content calendar.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 3 complete</label>
+</section>
+
+<section class="module">
+<h3>Week 4: AI Marketing and Analytics</h3>
+<p>Use AI tools to improve marketing work and understand results.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: Introduction to AI marketing tools</p>
+<p>Lesson 2: Using AI for content and research</p>
+<p>Lesson 3: Marketing analytics and performance</p>
+<p>Assignment: Create an AI-assisted marketing campaign idea.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 4 complete</label>
+</section>
+
+<section class="module">
+<h3>Week 5: Automation and CRM</h3>
+<p>Understand how businesses organise customers and automate tasks.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: What is marketing automation?</p>
+<p>Lesson 2: CRM and customer relationships</p>
+<p>Lesson 3: Building simple business workflows</p>
+<p>Assignment: Draw a simple customer follow-up workflow.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 5 complete</label>
+</section>
+
+<section class="module">
+<h3>Week 6: Campaign Launch and Agency Basics</h3>
+<p>Bring your knowledge together in a practical project.</p>
+<details>
+<summary>Open lessons</summary>
+<p>Lesson 1: Planning a marketing campaign</p>
+<p>Lesson 2: Delivering work to clients</p>
+<p>Lesson 3: Starting a marketing service business</p>
+<p>Final project: Design a complete marketing campaign for a business.</p>
+</details>
+<label class="task"><input type="checkbox" class="done"> Mark Week 6 complete</label>
+</section>
+
+<button onclick="localStorage.removeItem('academyProgress');document.querySelectorAll('.done').forEach(x=>x.checked=false);update()">Reset progress</button>
+</main>
+
+<footer>AI Marketing Academy | Learn. Practise. Grow.</footer>
+
+<script>
+const checks=document.querySelectorAll('.done');
+function update(){
+let n=[...checks].filter(x=>x.checked).length;
+document.getElementById('bar').style.width=(n/6*100)+'%';
+document.getElementById('count').textContent=n+' of 6 weeks completed';
+localStorage.setItem('academyProgress',JSON.stringify([...checks].map(x=>x.checked)));
+}
+let saved=JSON.parse(localStorage.getItem('academyProgress')||'[]');
+checks.forEach((x,i)=>{x.checked=!!saved[i];x.addEventListener('change',update)});
+update();
+</script>
+</body>
+  </html>
